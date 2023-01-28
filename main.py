@@ -32,7 +32,7 @@ def edit_foto(table_class, image_pil):
 
 @st.cache
 def load_model():
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', trust_repo=True)
     return model
 
 def main():
