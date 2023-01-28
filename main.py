@@ -4,16 +4,11 @@ from PIL import Image, ImageDraw
 import torch
 
 def load_image():
-    """Создание формы для загрузки изображения"""
-    # Форма для загрузки изображения средствами Streamlit
     uploaded_file = st.file_uploader(
         label='Выберите изображение для детекции')
     if uploaded_file is not None:
-        # Получение загруженного изображения
         image_data = uploaded_file.getvalue()
-        # Показ загруженного изображения на Web-странице средствами Streamlit
         st.image(image_data)
-        # Возврат изображения в формате PIL
         return Image.open(io.BytesIO(image_data))
     else:
         return None
@@ -53,11 +48,12 @@ def main():
     elif page == page_list[1]:
         st.title('Детекция людей на изображениях')
         original_imag_pil = load_image()
-        result = st.button('Найти людей на изображении')
+        st.text('После загрузки и появления исходного изображения нажмите кнопку "Детекция"')
+        result = st.button('Детекция')
+        
 
         if result and original_imag_pil is not None:
             model = load_model()
-            st.text("Поиск людей на изображении")
             result_predict = model(original_imag_pil)
             table_class = result_predict.pandas().xyxy[0]
             table_class = table_class[table_class["class"] == 0]
