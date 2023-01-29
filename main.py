@@ -16,13 +16,14 @@ def load_image():
 def edit_foto(table_class, image_pil):
     image = image_pil.convert("RGBA")
     image2 = Image.new('RGBA', (image.width, image.height))
+    size_max = max(image2.size)
+    size_border = math.ceil(size_max * 0.008)
     tempDraw = ImageDraw.Draw(image2)
     for row in range(len(table_class)):
         tempDraw.rectangle([(table_class.iloc[row, 0], table_class.iloc[row, 1]),
                             (table_class.iloc[row, 2], table_class.iloc[row, 3])],
-                           fill=(0, 0, 255, 150),
-                           outline="red")
-    image.paste(image2, (0, 0), image2)
+                           outline="red", width=size_border)
+        image.paste(image2, (0, 0), image2)
     return image
 
 @st.cache
