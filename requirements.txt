@@ -1,5 +1,6 @@
 # Base ------------------------------------------------------------------------
 gitpython
+math
 ipython  # interactive notebook
 matplotlib>=3.2.2
 numpy>=1.18.5
