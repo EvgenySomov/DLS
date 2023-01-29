@@ -2,7 +2,6 @@ import io
 import streamlit as st
 from PIL import Image, ImageDraw
 import torch
-import math
 
 def load_image():
     uploaded_file = st.file_uploader(
@@ -18,7 +17,7 @@ def edit_foto(table_class, image_pil):
     image = image_pil.convert("RGBA")
     image2 = Image.new('RGBA', (image.width, image.height))
     size_max = max(image2.size)
-    size_border = math.ceil(size_max * 0.008)
+    size_border = int(size_max * 0.008)
     tempDraw = ImageDraw.Draw(image2)
     for row in range(len(table_class)):
         tempDraw.rectangle([(table_class.iloc[row, 0], table_class.iloc[row, 1]),
